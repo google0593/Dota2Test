@@ -2,4 +2,16 @@
     <string name="app_name">Dota2Test</string>
     <string name="name">fuck</string>
     <string name="abc">ABC</string>
+    <string name="match_number">Match Number</string>
+    <string name="p1">P1</string>
+    <string name="p2">P2</string>
+    <string name="p3">P3</string>
+    <string name="p4">P4</string>
+    <string name="p5">P5</string>
+    <string name="p6">P6</string>
+    <string name="p7">P7</string>
+    <string name="p8">P8</string>
+    <string name="p9">P9</string>
+    <string name="p10">P10</string>
+    <string name="user">USER</string>
 </resources>

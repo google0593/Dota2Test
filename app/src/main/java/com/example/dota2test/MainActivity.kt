@@ -36,29 +36,32 @@ class MainActivity : AppCompatActivity() {
         //recyclerView.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         recyclerView = findViewById(R.id.matchHistoryRecylerView)
         adapter = DotaMatchHistoryAdapter()
-        recyclerView.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
 
 
-
-        val service = RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
+        val service =
+            RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
         val call = service?.getAllMatchHistory()
-        call?.enqueue(object : Callback<MatchHistoryList>{
+        call?.enqueue(object : Callback<MatchHistoryList> {
             override fun onFailure(call: Call<MatchHistoryList>, t: Throwable) {
                 println("Failed to parse because ${t.fillInStackTrace()}")
 
             }
 
-            override fun onResponse(call: Call<MatchHistoryList>, response: Response<MatchHistoryList>
+            override fun onResponse(
+                call: Call<MatchHistoryList>, response: Response<MatchHistoryList>
             ) {
                 println("Parse OK")
-                val result1: List<MatchHistoryModel.Result.Matches> = response?.body()?.result!!.matches
-                val result2 = response?.body()?.result?.matches!![4].players[4].account_id
-                //val result3 = Matc
+                //val result1: List<MatchHistoryModel.Result.Matches> = response?.body()?.result?.result!!.matches
+                val result1: List<MatchHistoryModel.Result.Matches> = response.body()?.result!!.matches
+                //val result2 = response?.body()?.result?.matches!![4].players[4].account_id
+                // val result3: List<MatchHistoryModel.Result.Matches.Player> = response?.body()?.matchesa!!.players
                 //var data: List<> = ArrayList()
+                val responseBody = response.body()
 
                 //dataList = response?.body()?.result!!.matches as ArrayList<MatchHistoryModel.Result.Matches>
-                //println(dataList)
+                //println(response.body()!!.resultb)
                 adapter.swapData(result1)
 
             }
@@ -66,7 +69,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
 
 }

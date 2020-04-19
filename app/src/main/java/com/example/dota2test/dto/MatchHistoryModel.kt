@@ -1,5 +1,6 @@
 package com.example.dota2test.dto
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class MatchHistoryModel(
@@ -22,6 +23,7 @@ data class MatchHistoryModel(
             val match_id: Long,
             val match_seq_num: Long,
             @SerializedName("players")
+            @Expose
             val players: List<Player>,
             val radiant_team_id: Int,
             val start_time: Int
