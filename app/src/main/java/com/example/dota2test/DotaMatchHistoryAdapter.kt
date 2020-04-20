@@ -39,6 +39,9 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
         fun bind(item: MatchHistoryModel.Result.Matches) = with(itemView) {
 
             matchNumberView.text = item.match_id.toString()
+            val players = mutableListOf(item.players)
+            println(players)
+
 
             for ((index, player) in item.players.withIndex()) {
                 println("item.players: $player")
@@ -76,35 +79,11 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
                     }
                 }
             }
-            //val accountID = player.account_id.toString()
 
-//                playerOne.text = "Player One: " +  accountID
-//                playerTwo.text = "Player Two: " + player.account_id.toString()
-//                when(index){
-//                    0 -> playerOne.text = "Player One: " +  player.account_id.toString()
-//                    1 -> playerTwo.text = "Player Two: " + player.account_id.toString()
-//                    2 -> playerThree.text = "Player Three: " + player.account_id.toString()
-//                }
-
-//                playerThree.text = player.account_id.toString()
-//                playerFour.text = player.account_id.toString()
-//                playerFive.text = player.account_id.toString()
-//                playerSix.text = player.account_id.toString()
-//                playerSeven.text = player.account_id.toString()
-//                playerEight.text = player.account_id.toString()
-//                playerNine.text = player.account_id.toString()
-//                playerTen.text = player.account_id.toString()
-//            }
-//            var x = 0
-//            while (x < item.players.size) {
-//                println(x)
-//                x++ // Same as x += 1
-//            }
-
-            //accountID.text = item.players[item.players.size].account_id.toString()
             // TODO: Bind the data with View
             setOnClickListener {
                 // TODO: Handle on click
+
             }
         }
 
