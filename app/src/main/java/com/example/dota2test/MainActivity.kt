@@ -1,6 +1,8 @@
 package com.example.dota2test
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,22 +25,23 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: DotaMatchHistoryAdapter
-    var dataList = ArrayList<MatchHistoryModel.Result.Matches>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //recyclerView = findViewById(R.id.matchHistoryRecylerView)
-        //setting up the adapter
-        //recyclerView.adapter= DotaMatchHistoryAdapter(dataList,this)
-        //recyclerView.layoutManager= LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         recyclerView = findViewById(R.id.matchHistoryRecylerView)
         adapter = DotaMatchHistoryAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = adapter
 
+        //Padding set to 8dp
+        recyclerView.addItemDecoration(
+            MarginItemDecoration(
+                resources.getDimension(R.dimen.default_padding).toInt()
+            )
+        )
+        recyclerView.adapter = adapter
 
         val service =
             RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
@@ -53,22 +56,31 @@ class MainActivity : AppCompatActivity() {
                 call: Call<MatchHistoryList>, response: Response<MatchHistoryList>
             ) {
                 println("Parse OK")
-                //val result1: List<MatchHistoryModel.Result.Matches> = response?.body()?.result?.result!!.matches
-                val result1: List<MatchHistoryModel.Result.Matches> = response.body()?.result!!.matches
-                //val result2 = response?.body()?.result?.matches!![4].players[4].account_id
-                // val result3: List<MatchHistoryModel.Result.Matches.Player> = response?.body()?.matchesa!!.players
-                //var data: List<> = ArrayList()
+                val result1: List<MatchHistoryModel.Result.Matches> =
+                    response.body()?.result!!.matches
                 val responseBody = response.body()
 
-                //dataList = response?.body()?.result!!.matches as ArrayList<MatchHistoryModel.Result.Matches>
-                //println(response.body()!!.resultb)
                 adapter.swapData(result1)
 
             }
         })
 
-
     }
 
+    class MarginItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect, view: View,
+            parent: RecyclerView, state: RecyclerView.State
+        ) {
+            with(outRect) {
+                if (parent.getChildAdapterPosition(view) == 0) {
+                    top = spaceHeight
+                }
+                left = spaceHeight
+                right = spaceHeight
+                bottom = spaceHeight
+            }
+        }
+    }
 
 }
