@@ -2,12 +2,17 @@ package com.example.dota2test
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.service.autofill.FieldClassification
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dota2test.dto.MatchHistoryList
 import com.example.dota2test.dto.MatchHistoryModel
+import com.example.dota2test.userInfo.UserInfoList
+import com.example.dota2test.userInfo.UserInfoModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Dota 2 API KEY = 98386B16E9E93CE3F216965CC303BEA5
-     * My personal steam id = 64335358
-     * Personal match history = https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?account_id=64335358&key=98386B16E9E93CE3F216965CC303BEA5
+     * My personal steam id = 76561198024601086
+     * Personal match history = https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?account_id=76561198024601086&key=98386B16E9E93CE3F216965CC303BEA5
      * https://www.youtube.com/watch?v=53BsyxwSBJk&t=1106s tutorial
      * */
 
@@ -52,18 +57,39 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            override fun onResponse(
-                call: Call<MatchHistoryList>, response: Response<MatchHistoryList>
-            ) {
+            override fun onResponse(call: Call<MatchHistoryList>, response: Response<MatchHistoryList>) {
                 println("Parse OK")
                 val result1: List<MatchHistoryModel.Result.Matches> =
                     response.body()?.result!!.matches
                 val responseBody = response.body()
 
+
                 adapter.swapData(result1)
 
             }
         })
+
+
+        val call2 = service?.getUserInfo()
+        call2?.enqueue(object : Callback<UserInfoList> {
+            override fun onFailure(call: Call<UserInfoList>, t: Throwable) {
+                println("Failed to parse userinfo because ${t.fillInStackTrace()}")
+            }
+            override fun onResponse(call: Call<UserInfoList>, response: Response<UserInfoList>) {
+                println("Parse OK")
+
+                val userInfoResponse = response.body()?.response!!.players[0].personaname
+                personNameView.text = response.body()?.response!!.players[0].personaname
+                val imgURL = response.body()?.response!!.players[0].avatarfull
+                Picasso.get().load(imgURL).into(userAvatarImg);
+
+
+
+            }
+        })
+
+
+
 
     }
 
