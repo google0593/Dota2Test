@@ -82,9 +82,6 @@ class MainActivity : AppCompatActivity() {
                 personNameView.text = response.body()?.response!!.players[0].personaname
                 val imgURL = response.body()?.response!!.players[0].avatarfull
                 Picasso.get().load(imgURL).into(userAvatarImg);
-
-
-
             }
         })
 

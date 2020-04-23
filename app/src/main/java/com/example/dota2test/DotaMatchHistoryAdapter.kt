@@ -39,43 +39,48 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
         fun bind(item: MatchHistoryModel.Result.Matches) = with(itemView) {
 
             matchNumberView.text = item.match_id.toString()
-            val players = mutableListOf(item.players)
-            println(players)
+
+            //println(players)
 
 
             for ((index, player) in item.players.withIndex()) {
                 println("item.players: $player")
+                //convert 32 Bit steam id to 64 bit steam id
+                //formula 76561197960265728 + 32 Steam ID
+
+                val steamID64: Long = 76561197960265728 + player.account_id
+
                 println(index)
                 when (index) {
                     0 -> {
-                        playerOne.text = player.account_id.toString()
+                        playerOne.text = steamID64.toString()
                     }
                     1 -> {
-                        playerTwo.text = player.account_id.toString()
+                        playerTwo.text = steamID64.toString()
                     }
                     2 -> {
-                        playerThree.text = player.account_id.toString()
+                        playerThree.text = steamID64.toString()
                     }
                     3 -> {
-                        playerFour.text = player.account_id.toString()
+                        playerFour.text = steamID64.toString()
                     }
                     4 -> {
-                        playerFive.text = player.account_id.toString()
+                        playerFive.text = steamID64.toString()
                     }
                     5 -> {
-                        playerSix.text = player.account_id.toString()
+                        playerSix.text = steamID64.toString()
                     }
                     6 -> {
-                        playerSeven.text = player.account_id.toString()
+                        playerSeven.text = steamID64.toString()
                     }
                     7 -> {
-                        playerEight.text = player.account_id.toString()
+                        playerEight.text = steamID64.toString()
                     }
                     8 -> {
-                        playerNine.text = player.account_id.toString()
+                        playerNine.text = steamID64.toString()
                     }
                     9 -> {
-                        playerTen.text = player.account_id.toString()
+                        playerTen.text = steamID64.toString()
                     }
                 }
             }

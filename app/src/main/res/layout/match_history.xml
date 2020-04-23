@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#CFC6C6"
@@ -14,78 +16,96 @@
         app:cardElevation="6dp"
         app:contentPadding="10dp">
 
+        <TextView
+            android:id="@+id/matchNumberView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/match_number" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:weightSum="10">
 
-            <TextView
-                android:id="@+id/matchNumberView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/match_number" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/playerFour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p4" />
+                <TextView
+                    android:id="@+id/playerOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p1" />
 
-            <TextView
-                android:id="@+id/playerSix"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p6" />
+                <TextView
+                    android:id="@+id/playerTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p2" />
 
-            <TextView
-                android:id="@+id/playerTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p2" />
+                <TextView
+                    android:id="@+id/playerThree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p3" />
 
-            <TextView
-                android:id="@+id/playerNine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p9" />
+                <TextView
+                    android:id="@+id/playerFour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p4" />
 
-            <TextView
-                android:id="@+id/playerOne"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p1" />
+                <TextView
+                    android:id="@+id/playerFive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p5" />
 
-            <TextView
-                android:id="@+id/playerSeven"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p7" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/playerTen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p10" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/playerFive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p5" />
+                <TextView
+                    android:id="@+id/playerSix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p6" />
 
-            <TextView
-                android:id="@+id/playerThree"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p3" />
+                <TextView
+                    android:id="@+id/playerSeven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p7" />
 
-            <TextView
-                android:id="@+id/playerEight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/p8" />
+                <TextView
+                    android:id="@+id/playerEight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p8" />
+
+                <TextView
+                    android:id="@+id/playerNine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p9" />
+
+                <TextView
+                    android:id="@+id/playerTen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p10" />
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>
