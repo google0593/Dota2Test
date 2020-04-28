@@ -2,7 +2,6 @@ package com.example.dota2test
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.service.autofill.FieldClassification
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,13 +27,19 @@ class MainActivity : AppCompatActivity() {
      * https://www.youtube.com/watch?v=53BsyxwSBJk&t=1106s tutorial
      * */
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     lateinit var adapter: DotaMatchHistoryAdapter
+    val mutableList = mutableListOf<Long>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val service =
+            RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
+
+
 
         recyclerView = findViewById(R.id.matchHistoryRecylerView)
         adapter = DotaMatchHistoryAdapter()
@@ -48,8 +53,11 @@ class MainActivity : AppCompatActivity() {
         )
         recyclerView.adapter = adapter
 
-        val service =
-            RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
+
+        /**
+         * Match History
+         * */
+
         val call = service?.getAllMatchHistory()
         call?.enqueue(object : Callback<MatchHistoryList> {
             override fun onFailure(call: Call<MatchHistoryList>, t: Throwable) {
@@ -57,17 +65,24 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            override fun onResponse(call: Call<MatchHistoryList>, response: Response<MatchHistoryList>) {
+            override fun onResponse(
+                call: Call<MatchHistoryList>,
+                response: Response<MatchHistoryList>
+            ) {
                 println("Parse OK")
                 val result1: List<MatchHistoryModel.Result.Matches> =
                     response.body()?.result!!.matches
                 val responseBody = response.body()
-
+                //println(result1)
 
                 adapter.swapData(result1)
 
             }
         })
+
+        /**
+         * User details
+         * */
 
 
         val call2 = service?.getUserInfo()
@@ -75,6 +90,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<UserInfoList>, t: Throwable) {
                 println("Failed to parse userinfo because ${t.fillInStackTrace()}")
             }
+
             override fun onResponse(call: Call<UserInfoList>, response: Response<UserInfoList>) {
                 println("Parse OK")
 
@@ -85,8 +101,25 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        /**
+         * Match History Player Info
+         * */
 
-
+//        val call3 = service?.getUsers(geeks)
+//        call3?.enqueue(object : Callback<UserInfoList?> {
+//            override fun onFailure(call: Call<UserInfoList?>, t: Throwable) {
+//                println("Failed to parse userinfo because ${t.fillInStackTrace()}")
+//            }
+//
+//            override fun onResponse(call: Call<UserInfoList?>, response: Response<UserInfoList?>) {
+//                println("Parse OK")
+//
+//                val userInfoResponse = response.body()
+//                //personNameView.text = response.body()?.response!!.players[0].personaname
+//                //val imgURL = response.body()?.response!!.players[0].avatarfull
+//                //Picasso.get().load(imgURL).into(userAvatarImg);
+//            }
+//        })
 
     }
 

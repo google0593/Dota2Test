@@ -1,10 +1,16 @@
 package com.example.dota2test
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dota2test.Test.getSteamNames
+
+
 import com.example.dota2test.dto.MatchHistoryModel
 import kotlinx.android.synthetic.main.match_history.view.*
 
@@ -12,8 +18,6 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
     //var data: List<MatchHistoryList> = ArrayList()
     //var dataPlayer: List<MatchHistoryModel.Result.Matches.Player> = ArrayList()
     var data: List<MatchHistoryModel.Result.Matches> = ArrayList()
-
-    private val listItems: ArrayList<MatchHistoryModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -26,7 +30,7 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
 //    override fun onBindViewHolder(holder: ViewHolder, position: Int){
-//        holder.itemView.testView.text = data[position].match_id.toString()
+//        holder.itemView.matchNumberView.text = data[position].match_id.toString()
 //    }
 
     fun swapData(data: List<MatchHistoryModel.Result.Matches>) {
@@ -35,62 +39,86 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
         notifyDataSetChanged()
     }
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bind(item: MatchHistoryModel.Result.Matches) = with(itemView) {
+            var steamID64: String = ""
+            var steamIDs = mutableListOf<Long>()
+            var steamLong: Long = 0
 
             matchNumberView.text = item.match_id.toString()
-
-            //println(players)
-
-
             for ((index, player) in item.players.withIndex()) {
-                println("item.players: $player")
-                //convert 32 Bit steam id to 64 bit steam id
-                //formula 76561197960265728 + 32 Steam ID
 
-                val steamID64: Long = 76561197960265728 + player.account_id
+                /**
+                 *convert 32 Bit steam id to 64 bit steam id
+                 *formula 76561197960265728 + 32 Steam ID
+                 **/
+                if (player.account_id == 4294967295) {
+                    steamID64 = 11111111.toString()
 
-                println(index)
+                } else {
+                    steamID64 = (76561197960265728 + player.account_id).toString()
+                }
                 when (index) {
                     0 -> {
-                        playerOne.text = steamID64.toString()
+                        playerOne.text = steamID64
                     }
                     1 -> {
-                        playerTwo.text = steamID64.toString()
+                        playerTwo.text = steamID64
                     }
                     2 -> {
-                        playerThree.text = steamID64.toString()
+                        playerThree.text = steamID64
                     }
                     3 -> {
-                        playerFour.text = steamID64.toString()
+                        playerFour.text = steamID64
                     }
                     4 -> {
-                        playerFive.text = steamID64.toString()
+                        playerFive.text = steamID64
                     }
                     5 -> {
-                        playerSix.text = steamID64.toString()
+                        playerSix.text = steamID64
                     }
                     6 -> {
-                        playerSeven.text = steamID64.toString()
+                        playerSeven.text = steamID64
                     }
                     7 -> {
-                        playerEight.text = steamID64.toString()
+                        playerEight.text = steamID64
                     }
                     8 -> {
-                        playerNine.text = steamID64.toString()
+                        playerNine.text = steamID64
                     }
                     9 -> {
-                        playerTen.text = steamID64.toString()
+                        playerTen.text = steamID64
                     }
                 }
+                //println("SteamIDS: $steamIDs")
+                //println("Player One: " + getSteamNames(item.players[0].account_id) + 76561197960265728)
+                //println("Player Two: " + getSteamNames(item.players[1].account_id) + 76561197960265728)
+
             }
 
             // TODO: Bind the data with View
             setOnClickListener {
-                // TODO: Handle on click
 
+//                println(playerOne.text)
+//                Toast.makeText(context, playerOne.text, Toast.LENGTH_SHORT).show()
+                val a = item.players
+                for(players in a){
+                    if(players.account_id == 4294967295){
+                        //if player is anonymous
+                        steamIDs.add(76561198106149037)
+                    }else{
+                        steamIDs.add((players.account_id + 76561197960265728))
+                    }
+                }
+                println("Steam IDS list:  $steamIDs")
+                getSteamNames(steamIDs as ArrayList<Long>)
+                steamIDs.clear()
             }
+
         }
 
     }
+
 }
