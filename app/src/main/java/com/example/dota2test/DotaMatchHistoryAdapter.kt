@@ -1,12 +1,11 @@
 package com.example.dota2test
 
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dota2test.Test.getSteamNames
 
@@ -15,9 +14,9 @@ import com.example.dota2test.dto.MatchHistoryModel
 import kotlinx.android.synthetic.main.match_history.view.*
 
 class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.ViewHolder>() {
-    //var data: List<MatchHistoryList> = ArrayList()
-    //var dataPlayer: List<MatchHistoryModel.Result.Matches.Player> = ArrayList()
-    var data: List<MatchHistoryModel.Result.Matches> = ArrayList()
+
+    private var data: List<MatchHistoryModel.Result.Matches> = ArrayList()
+    private val viewPool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -28,9 +27,13 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int){
-//        holder.itemView.matchNumberView.text = data[position].match_id.toString()
+   override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
+//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+//
+//        holder.bind(data[position])
+//
+//
+//
 //    }
 
     fun swapData(data: List<MatchHistoryModel.Result.Matches>) {
@@ -43,9 +46,9 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: MatchHistoryModel.Result.Matches) = with(itemView) {
-            var steamID64: String = ""
-            var steamIDs = mutableListOf<Long>()
-            var steamLong: Long = 0
+            var steamID64: String
+            val steamIDs = mutableListOf<Long>()
+
 
             matchNumberView.text = item.match_id.toString()
             for ((index, player) in item.players.withIndex()) {
@@ -104,11 +107,11 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
 //                println(playerOne.text)
 //                Toast.makeText(context, playerOne.text, Toast.LENGTH_SHORT).show()
                 val a = item.players
-                for(players in a){
-                    if(players.account_id == 4294967295){
+                for (players in a) {
+                    if (players.account_id == 4294967295) {
                         //if player is anonymous
                         steamIDs.add(76561198106149037)
-                    }else{
+                    } else {
                         steamIDs.add((players.account_id + 76561197960265728))
                     }
                 }

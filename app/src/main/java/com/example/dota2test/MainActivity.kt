@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     lateinit var adapter: DotaMatchHistoryAdapter
-    val mutableList = mutableListOf<Long>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +51,9 @@ class MainActivity : AppCompatActivity() {
             )
         )
         recyclerView.adapter = adapter
+
+
+
 
 
         /**

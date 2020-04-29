@@ -35,11 +35,20 @@ object Test {
             override fun onResponse(call: Call<UserInfoList>, response: Response<UserInfoList>) {
                 println("Parse OK: getSteamNames")
                 val result2: List<UserInfoModel.Response.Player> = response.body()?.response!!.players
-                println("onResponse first index: ${result2[0].personaname}")
-                println("onResponse second index: ${result2[1].personaname}")
-                println("onResponse third index: ${result2[2].personaname}")
-                println("onResponse AB2: ${result2.forEach { println("") }}")
+//                println("onResponse first index: ${result2[0].personaname}")
+//                println("onResponse second index: ${result2[1].personaname}")
+//                println("onResponse third index: ${result2[2].personaname}")
+
+                for(players in result2){
+                    println("onResponse result2: "+ players.personaname)
+                }
+
+                for(players in response.body()!!.response.players){
+                    println("onResponse response.body(): "+ players.personaname)
+                }
+
                 println("onResponse response: ${response.body()}")
+                println("onResponse response size:${response.body()!!.response.players.size} onResponse result2 size:${result2.size}")
                 println("onResponse link:${response.raw().request().url()}")
 
             }
