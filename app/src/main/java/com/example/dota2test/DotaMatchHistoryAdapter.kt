@@ -4,19 +4,17 @@ package com.example.dota2test
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dota2test.Test.getSteamNames
-
-
 import com.example.dota2test.dto.MatchHistoryModel
+import com.example.dota2test.userInfo.UserInfoModel
 import kotlinx.android.synthetic.main.match_history.view.*
 
 class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.ViewHolder>() {
 
     private var data: List<MatchHistoryModel.Result.Matches> = ArrayList()
-    private val viewPool = RecyclerView.RecycledViewPool()
+    var playerData: List<UserInfoModel.Response.Player> = ArrayList()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -27,14 +25,13 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
 
     override fun getItemCount() = data.size
 
-   override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//
-//        holder.bind(data[position])
-//
-//
-//
-//    }
+    //    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(data[position])
+//        holder.itemView.playerOne.text = playerData[0].personaname
+
+
+    }
 
     fun swapData(data: List<MatchHistoryModel.Result.Matches>) {
         this.data = data
@@ -43,11 +40,22 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
     }
 
 
+//    fun getPlayersInfo(playerData: List<UserInfoModel.Response.Player>) {
+//        this.playerData = playerData
+//        println("getPlayersInfo this:" + this.playerData)
+//        println("getPlayersInfo:" + playerData)
+//
+//        //notifyDataSetChanged()
+//    }
+
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: MatchHistoryModel.Result.Matches) = with(itemView) {
             var steamID64: String
             val steamIDs = mutableListOf<Long>()
+
+
 
 
             matchNumberView.text = item.match_id.toString()
@@ -95,14 +103,12 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
                         playerTen.text = steamID64
                     }
                 }
-                //println("SteamIDS: $steamIDs")
-                //println("Player One: " + getSteamNames(item.players[0].account_id) + 76561197960265728)
-                //println("Player Two: " + getSteamNames(item.players[1].account_id) + 76561197960265728)
 
             }
 
             // TODO: Bind the data with View
             setOnClickListener {
+
 
 //                println(playerOne.text)
 //                Toast.makeText(context, playerOne.text, Toast.LENGTH_SHORT).show()
@@ -125,3 +131,4 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<DotaMatchHistoryAdapter.V
     }
 
 }
+
