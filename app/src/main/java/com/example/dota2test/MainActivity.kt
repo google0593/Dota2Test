@@ -87,7 +87,6 @@ class MainActivity : AppCompatActivity() {
          * User details
          * */
 
-
         val call2 = service?.getUserInfo()
         call2?.enqueue(object : Callback<UserInfoList> {
             override fun onFailure(call: Call<UserInfoList>, t: Throwable) {
@@ -103,27 +102,6 @@ class MainActivity : AppCompatActivity() {
                 Picasso.get().load(imgURL).into(userAvatarImg);
             }
         })
-
-        /**
-         * Match History Player Info
-         * */
-
-//        val call3 = service?.getUsers(geeks)
-//        call3?.enqueue(object : Callback<UserInfoList?> {
-//            override fun onFailure(call: Call<UserInfoList?>, t: Throwable) {
-//                println("Failed to parse userinfo because ${t.fillInStackTrace()}")
-//            }
-//
-//            override fun onResponse(call: Call<UserInfoList?>, response: Response<UserInfoList?>) {
-//                println("Parse OK")
-//
-//                val userInfoResponse = response.body()
-//                //personNameView.text = response.body()?.response!!.players[0].personaname
-//                //val imgURL = response.body()?.response!!.players[0].avatarfull
-//                //Picasso.get().load(imgURL).into(userAvatarImg);
-//            }
-//        })
-
     }
 
     class MarginItemDecoration(private val spaceHeight: Int) : RecyclerView.ItemDecoration() {

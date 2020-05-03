@@ -31,7 +31,7 @@ data class MatchHistoryModel(
         ) {
             data class Player(
                 @SerializedName("account_id")
-                val account_id: Long,
+                var account_id: Long,
                 val hero_id: Int,
                 val player_slot: Int
             )

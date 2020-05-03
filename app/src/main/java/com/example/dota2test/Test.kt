@@ -1,67 +1,81 @@
 package com.example.dota2test
 
+import android.view.View
+import android.widget.TextView
+import com.example.dota2test.dto.MatchHistoryModel
 import com.example.dota2test.userInfo.UserInfoList
 import com.example.dota2test.userInfo.UserInfoModel
+import kotlinx.android.synthetic.main.match_history.view.*
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 object Test {
-    private val service = RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
-
+    val service =
+        RetrofitClientInstance.retrofitInstance?.create(GetMatchHistoryService::class.java)
+    var playerData: List<UserInfoModel.Response.Player> = ArrayList()
+    val adapter = DotaMatchHistoryAdapter()
 
     /**
      *Reference for this code: https://stackoverflow.com/questions/38092895/retrofit-query-annotation-without-ampersand
      */
+    /**
+     * Todo
+     *
+     *  */
+    fun getUserInfo(v: View, item: MatchHistoryModel.Result.Matches) {
 
-    private const val steamGetPlayerSummariesCall = "ISteamUser/GetPlayerSummaries/v0002/?key=98386B16E9E93CE3F216965CC303BEA5&"
-
-
-    lateinit var result2: List<UserInfoModel.Response.Player>
-    var adapter: DotaMatchHistoryAdapter = DotaMatchHistoryAdapter()
-    fun getSteamNames(ab: MutableList<Long>) {
-
+        var steamID64: Long
+        val steamIDs = mutableListOf<Long>()
         var steamIDUrl = ""
+        val steamGetPlayerSummariesCall =
+            "ISteamUser/GetPlayerSummaries/v0002/?key=98386B16E9E93CE3F216965CC303BEA5&"
 
-        for (steamID in ab) {
+
+        for (player in item.players) {
+            if (player.account_id == 4294967295) {
+                steamIDs.add(76561198106149037)
+            } else {
+                steamID64 = (player.account_id + 76561197960265728)
+                steamIDs.add(steamID64)
+            }
+        }
+
+        for (steamID in steamIDs) {
             steamIDUrl += "steamids=$steamID"
         }
-        println("onResponse AB1: $ab")
-
 
 
         val call3 = service?.getUsers(steamGetPlayerSummariesCall + steamIDUrl)
         call3?.enqueue(object : Callback<UserInfoList> {
             override fun onFailure(call: Call<UserInfoList>, t: Throwable) {
-                println("Failed to parse userinfo because ${t.fillInStackTrace()}")
+                println("Failed to parse userInfo because ${t.fillInStackTrace()}")
             }
-            override fun onResponse(call: Call<UserInfoList>, response: Response<UserInfoList>) {
-                println("Parse OK: getSteamNames")
-                result2 = response.body()?.response!!.players
-                println("onResponse first index: ${result2[0].personaname}")
-                println("onResponse second index: ${result2[1].personaname}")
-                println("onResponse third index: ${result2[2].personaname}")
 
-//                for(players in result2){
-//                    println("onResponse result2: "+ players.personaname)
-//                }
+            override fun onResponse(
+                call: Call<UserInfoList>,
+                response: Response<UserInfoList>
+            ) {
+                println("Parse OK link:${response.raw().request().url()}")
+                println("Parse OK: getSteamNames$" + response.body())
+                val result2: List<UserInfoModel.Response.Player> =
+                    response.body()?.response!!.players
 
-//                for(players in response.body()!!.response.players){
-//                    println("onResponse response.body(): "+ players.personaname)
-//                }
-                println("onResponse response: ${response.body()}")
-                println("onResponse response size:${response.body()!!.response.players.size} onResponse result2 size:${result2.size}")
-                println("onResponse link:${response.raw().request().url()}")
-
-
-
+                v.playerOne.text = result2[0].personaname
+                v.playerTwo.text = result2[1].personaname
+                v.playerThree.text = result2[2].personaname
+                v.playerFour.text = result2[3].personaname
+                v.playerFive.text = result2[4].personaname
+                v.playerSix.text = result2[5].personaname
+                v.playerSeven.text = result2[6].personaname
+                v.playerEight.text = result2[7].personaname
+                v.playerNine.text = result2[8].personaname
+                v.playerTen.text = result2[9].personaname
             }
         })
-        ab.clear()
-       // print("onResponse return:" + result2)
-        //return (result2)
-    }
 
+    }
 
 
 }
