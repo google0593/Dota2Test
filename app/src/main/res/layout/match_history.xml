@@ -33,38 +33,85 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:orientation="vertical">
+                android:layout_weight="5">
 
-                <TextView
-                    android:id="@+id/playerOne"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/p1" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/playerTwo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p2" />
+                    <ImageView
+                        android:id="@+id/playerOneImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
-                <TextView
-                    android:id="@+id/playerThree"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p3" />
+                    <ImageView
+                        android:id="@+id/playerTwoImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
-                <TextView
-                    android:id="@+id/playerFour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p4" />
+                    <ImageView
+                        android:id="@+id/playerThreeImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
-                <TextView
-                    android:id="@+id/playerFive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p5" />
+                    <ImageView
+                        android:id="@+id/playerFourImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+                    <ImageView
+                        android:id="@+id/playerFiveImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/playerOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p1" />
+
+                    <TextView
+                        android:id="@+id/playerTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p2" />
+
+                    <TextView
+                        android:id="@+id/playerThree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p3" />
+
+                    <TextView
+                        android:id="@+id/playerFour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p4" />
+
+                    <TextView
+                        android:id="@+id/playerFive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p5" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -72,39 +119,88 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/playerSix"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/p6" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/playerSeven"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p7" />
+                    <ImageView
+                        android:id="@+id/playerSixImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
-                <TextView
-                    android:id="@+id/playerEight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p8" />
+                    <ImageView
+                        android:id="@+id/playerSevenImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
-                <TextView
-                    android:id="@+id/playerNine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p9" />
+                    <ImageView
+                        android:id="@+id/playerEightImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
-                <TextView
-                    android:id="@+id/playerTen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/p10" />
+                    <ImageView
+                        android:id="@+id/playerNineImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
 
+                    <ImageView
+                        android:id="@+id/playerTenImg"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        app:srcCompat="@drawable/ic_launcher_foreground" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/playerSix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p6" />
+
+                    <TextView
+                        android:id="@+id/playerSeven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p7" />
+
+                    <TextView
+                        android:id="@+id/playerEight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p8" />
+
+                    <TextView
+                        android:id="@+id/playerNine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p9" />
+
+                    <TextView
+                        android:id="@+id/playerTen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/p10" />
+
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
