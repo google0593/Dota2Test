@@ -3,6 +3,8 @@ package com.example.dota2test
 import android.graphics.*
 import android.view.View
 import com.example.dota2test.dto.MatchHistoryModel
+import com.example.dota2test.matchdetails.MatchDetailsList
+import com.example.dota2test.matchdetails.MatchDetailsModel
 import com.example.dota2test.userInfo.UserInfoList
 import com.example.dota2test.userInfo.UserInfoModel
 import com.squareup.picasso.Picasso
@@ -99,18 +101,17 @@ object Test {
 
     fun getMatchDetails(matchID: String){
         val steamGetPlayerSummariesCall =
-            "IDOTA2Match_570/GetMatchDetails/V001/?key=98386B16E9E93CE3F216965CC303BEA5&"
-        val call3 = service?.getUsers(steamGetPlayerSummariesCall + matchID)
-        call3?.enqueue(object : Callback<UserInfoList> {
-            override fun onFailure(call: Call<UserInfoList>, t: Throwable) {
-                println("Failed to parse userInfo because ${t.fillInStackTrace()}")
+            "IDOTA2Match_570/GetMatchDetails/V001/?key=98386B16E9E93CE3F216965CC303BEA5&match_id="
+        val call3 = service?.getMatchDetails(steamGetPlayerSummariesCall + matchID)
+        println("getMatchDetails:$matchID")
+        call3?.enqueue(object : Callback<MatchDetailsList> {
+            override fun onFailure(call: Call<MatchDetailsList>, t: Throwable) {
+                println("Failed to parse match details because ${t.fillInStackTrace()}")
             }
 
-            override fun onResponse(call: Call<UserInfoList>, response: Response<UserInfoList>) {
+            override fun onResponse(call: Call<MatchDetailsList>, response: Response<MatchDetailsList>) {
                 println("Parse OK link:${response.raw().request().url()}")
-                println("Parse OK: getMatchDetails$" + response.body())
-                val result2: List<UserInfoModel.Response.Player> =
-                    response.body()?.response!!.players
+                println("MatchDetails:${response.body()}")
 
 
             }
@@ -119,7 +120,7 @@ object Test {
 
     class CircleTransform : Transformation {
         override fun transform(source: Bitmap): Bitmap {
-            val size = Math.min(source.width, source.height)
+            val size = source.width.coerceAtMost(source.height)
             val x = (source.width - size) / 2
             val y = (source.height - size) / 2
             val squaredBitmap = Bitmap.createBitmap(source, x, y, size, size)

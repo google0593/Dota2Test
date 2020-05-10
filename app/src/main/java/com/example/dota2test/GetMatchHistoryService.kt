@@ -2,6 +2,7 @@ package com.example.dota2test
 
 
 import com.example.dota2test.dto.MatchHistoryList
+import com.example.dota2test.matchdetails.MatchDetailsList
 import com.example.dota2test.userInfo.UserInfoList
 import retrofit2.Call
 import retrofit2.http.GET
@@ -33,5 +34,7 @@ interface GetMatchHistoryService {
     @GET
     fun getUsers(@Url steamIDURL: String): Call<UserInfoList>
 
+    @GET
+    fun getMatchDetails(@Url matchIDURL: String): Call<MatchDetailsList>
 
 }

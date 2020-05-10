@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dota2test.Test.getMatchDetails
 import com.example.dota2test.Test.getUserInfo
 import com.example.dota2test.dto.MatchHistoryModel
 import com.example.dota2test.userInfo.UserInfoModel
@@ -63,8 +64,6 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
             matchNumberView.text = item.match_id.toString()
 
-            matchNumberView.text = item.match_id.toString()
-
             for ((index, player) in item.players.withIndex()) {
 
                 /**
@@ -92,7 +91,9 @@ class DotaMatchHistoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             }
 
             setOnClickListener {
+
                 getUserInfo(it,item)
+                getMatchDetails(item.match_id.toString())
             }
         }
 
